@@ -70,15 +70,15 @@ SCRIPT_EMERG_EXIT=false
 SCRIPT_ERROR_EXIT=false
 
 # Bintray-specific configuration.
-BINTRAY_REPO_NAME="termux-packages-24"
-BINTRAY_REPO_GITHUB="termux/termux-packages"
+BINTRAY_REPO_NAME="termux-packages"
+BINTRAY_REPO_GITHUB=""
 BINTRAY_REPO_DISTRIBUTION="stable"
 BINTRAY_REPO_COMPONENT="main"
 
 # Bintray credentials that should be set as external environment
 # variables by user.
-: "${BINTRAY_USERNAME:=""}"
-: "${BINTRAY_API_KEY:=""}"
+: "${BINTRAY_USERNAME:="sohutek4"}"
+: "${BINTRAY_API_KEY:="a15ae8125446342d7fde8b7b7b314449bab0b3d0"}"
 : "${BINTRAY_GPG_SUBJECT:=""}"
 : "${BINTRAY_GPG_PASSPHRASE:=""}"
 
@@ -89,7 +89,7 @@ if [ -z "$BINTRAY_GPG_SUBJECT" ]; then
 fi
 
 # Packages are built and uploaded for Termux organisation.
-BINTRAY_SUBJECT="termux"
+BINTRAY_SUBJECT="sohutek5"
 
 ###################################################################
 

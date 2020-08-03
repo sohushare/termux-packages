@@ -14,10 +14,10 @@ trap 'rm -rf $BOOTSTRAP_TMPDIR' EXIT
 TERMUX_ARCHITECTURES=("aarch64" "arm" "i686" "x86_64")
 
 # Can be changed by using '--repository' option.
-REPO_BASE_URL="https://dl.bintray.com/termux/termux-packages-24"
+REPO_BASE_URL="https://dl.bintray.com/sohutek5/termux-packages"
 
 # Can be changed by using '--prefix' option.
-TERMUX_PREFIX="/data/data/com.termux/files/usr"
+TERMUX_PREFIX="/data/data/com.astrosohu/files/usr"
 
 # A list of non-essential packages. By default it is empty, but can
 # be filled with option '--add'.
@@ -294,6 +294,8 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	unset PACKAGE_METADATA
 	declare -A PACKAGE_METADATA
 	read_package_list "$package_arch"
+
+    pull_package libc++
 
 	# Core utilities.
 	pull_package bash
