@@ -367,12 +367,12 @@ upload_package() {
 
 	# Verify that our catalog is not empty.
 	set +o nounset
-	if [ ${#debfiles_catalog[@]} -eq 0 ]; then
-		set -o nounset
-		msg "    * ${1}: skipping because no files to upload."
-		SCRIPT_ERROR_EXIT=true
-		return 1
-	fi
+	# if [ ${#debfiles_catalog[@]} -eq 0 ]; then
+	# 	set -o nounset
+	# 	msg "    * ${1}: skipping because no files to upload."
+	# 	SCRIPT_ERROR_EXIT=true
+	# 	return 1
+	# fi
 	set -o nounset
 
 	if $SCRIPT_EMERG_EXIT; then

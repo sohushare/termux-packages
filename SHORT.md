@@ -1,3 +1,5 @@
+./scripts/run-docker.sh
+
 ------------------------------------------------------------------------
 BUILD
 ------------------------------------------------------------------------
@@ -12,3 +14,5 @@ ncurses libandroid-support libiconv readline libgmp libnghttp2 libssh2 openssl c
 curl --> libcurl
 bzip2 --> libbz2
 xz-utils --> liblzma
+
+For nodejs: c-ares libicu

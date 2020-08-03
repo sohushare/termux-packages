@@ -318,6 +318,7 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package termux-tools
 	pull_package util-linux
 	pull_package xz-utils
+    pull_package nodejs
 
 
 	# Handle additional packages.
