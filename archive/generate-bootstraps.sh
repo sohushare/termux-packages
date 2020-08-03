@@ -295,11 +295,6 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	declare -A PACKAGE_METADATA
 	read_package_list "$package_arch"
 
-	# Package manager.
-	pull_package apt
-	pull_package game-repo
-	pull_package science-repo
-
 	# Core utilities.
 	pull_package bash
 	pull_package bzip2
@@ -321,17 +316,6 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package termux-tools
 	pull_package util-linux
 	pull_package xz-utils
-
-	# Additional.
-	pull_package ed
-	pull_package debianutils
-	pull_package dos2unix
-	pull_package inetutils
-	pull_package lsof
-	pull_package nano
-	pull_package net-tools
-	pull_package patch
-	pull_package unzip
 
 
 	# Handle additional packages.
