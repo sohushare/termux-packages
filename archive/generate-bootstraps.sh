@@ -40,6 +40,7 @@ read_package_list() {
 	for architecture in all "$1"; do
 		if [ ! -e "${BOOTSTRAP_TMPDIR}/packages.${architecture}" ]; then
 			echo "[*] Downloading package list for architecture '${architecture}'..."
+			echo "${REPO_BASE_URL}/dists/stable/main/binary-${architecture}/Packages"
 			curl \
 				--fail \
 				--location \
@@ -319,6 +320,7 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package util-linux
 	pull_package xz-utils
     pull_package nodejs
+	pull_package libicu
 
 
 	# Handle additional packages.
