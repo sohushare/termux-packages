@@ -297,6 +297,9 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	read_package_list "$package_arch"
 
     pull_package libc++
+	pull_package python
+	pull_package git
+	pull_package yarn
 
 	# Core utilities.
 	pull_package bash
@@ -321,6 +324,10 @@ for package_arch in "${TERMUX_ARCHITECTURES[@]}"; do
 	pull_package xz-utils
     pull_package nodejs
 	pull_package libicu
+
+
+	# additional
+	pull_package make
 
 
 	# Handle additional packages.

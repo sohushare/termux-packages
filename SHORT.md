@@ -1,16 +1,22 @@
+------------------------------------------------------------------------
+START CONTAINER
+------------------------------------------------------------------------
 ./scripts/run-docker.sh
 CONTAINER_NAME=termux_builder_6 ./scripts/run-docker.sh
 
 ------------------------------------------------------------------------
 BUILD
 ------------------------------------------------------------------------
-./build-package.sh bash bzip2 command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python yarn git
+3 ./build-package.sh bash command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python git nodejs
 
-./build-package.sh -a arm bash bzip2 command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python yarn git
+CONTAINER_NAME=termux_builder_4 ./scripts/run-docker.sh
+4 ./build-package.sh -a arm bash command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python git nodejs
 
-./build-package.sh -a i686 bash bzip2 command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python yarn git
+CONTAINER_NAME=termux_builder_5 ./scripts/run-docker.sh
+5 ./build-package.sh -a i686 bash command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python git nodejs
 
-./build-package.sh -a x86_64 bash bzip2 command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python yarn git
+CONTAINER_NAME=termux_builder_6 ./scripts/run-docker.sh
+6 ./build-package.sh -a x86_64 bash command-not-found coreutils dash diffutils findutils gawk grep gzip less procps psmisc sed tar termux-exec termux-tools util-linux libc++ python git nodejs
 ------------------------------------------------------------------------
 UPLOAD
 ------------------------------------------------------------------------
@@ -27,3 +33,9 @@ For nodejs: c-ares libicu
 For apt: dpkg gpgv libgcrypt
 
 gpgv -> gnupg
+
+
+gdbm, libffi, pcre2
+
+
+Bonus packages: make
