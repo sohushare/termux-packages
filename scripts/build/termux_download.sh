@@ -14,7 +14,7 @@ termux_download() {
 	fi
 
 	local TMPFILE
-	TMPFILE=$(mktemp "$TERMUX_PKG_TMPDIR/download.$TERMUX_PKG_NAME.XXXXXXXXX")
+	TMPFILE=$(mktemp "$TERMUX_PKG_TMPDIR/download.${TERMUX_PKG_NAME-unnamed}.XXXXXXXXX")
 	echo "Downloading ${URL}"
 	if curl --fail --retry 20 --retry-connrefused --retry-delay 30 --location --output "$TMPFILE" "$URL"; then
 		local ACTUAL_CHECKSUM
@@ -23,17 +23,18 @@ termux_download() {
 			if [ "$CHECKSUM" != "$ACTUAL_CHECKSUM" ]; then
 				>&2 printf "Wrong checksum for %s:\nExpected: %s\nActual:   %s\n" \
 					   "$URL" "$CHECKSUM" "$ACTUAL_CHECKSUM"
-				exit 1
+				return 1
 			fi
 		else
 			printf "WARNING: No checksum check for %s:\nActual: %s\n" \
 			       "$URL" "$ACTUAL_CHECKSUM"
 		fi
 		mv "$TMPFILE" "$DESTINATION"
-		return
+		return 0
 	fi
 
-	termux_error_exit "Failed to download $URL"
+	echo "Failed to download $URL" >&2
+	return 1
 }
 
 # Make script standalone executable as well as sourceable

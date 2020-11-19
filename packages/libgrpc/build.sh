@@ -2,7 +2,8 @@ TERMUX_PKG_HOMEPAGE=https://grpc.io/
 TERMUX_PKG_DESCRIPTION="High performance, open source, general RPC framework that puts mobile and HTTP/2 first"
 TERMUX_PKG_LICENSE="Apache-2.0"
 TERMUX_PKG_SRCURL=https://github.com/grpc/grpc.git
-TERMUX_PKG_VERSION=1.30.2
+TERMUX_PKG_VERSION=1.32.0
+TERMUX_PKG_REVISION=1
 TERMUX_PKG_DEPENDS="libc++, openssl, protobuf, c-ares, zlib"
 TERMUX_PKG_BREAKS="libgrpc-dev"
 TERMUX_PKG_REPLACES="libgrpc-dev"
@@ -10,8 +11,8 @@ TERMUX_PKG_BUILD_DEPENDS="gflags, gflags-static, libprotobuf"
 TERMUX_PKG_HOSTBUILD=true
 TERMUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_EXTRA_CONFIGURE_ARGS="
--DCMAKE_STRIP=$(which strip)
--DGIT_EXECUTABLE=$(which git)
+-DCMAKE_STRIP=$(command -v strip)
+-DGIT_EXECUTABLE=$(command -v git)
 -DBUILD_SHARED_LIBS=ON
 -DgRPC_CARES_PROVIDER=package
 -DgRPC_PROTOBUF_PROVIDER=package
@@ -30,6 +31,7 @@ termux_step_post_get_source() {
 
 termux_step_host_build() {
 	termux_setup_cmake
+	termux_setup_ninja
 
 	cd $TERMUX_PKG_SRCDIR
 	export LD=gcc
@@ -41,11 +43,10 @@ termux_step_host_build() {
 	# when building version 1.17.2:
 	CXXFLAGS="-Wno-error=class-memaccess" \
 		CFLAGS="-Wno-implicit-fallthrough" \
-		make -j $TERMUX_MAKE_PROCESSES \
-		HAS_SYSTEM_PROTOBUF=false \
-		prefix=$TERMUX_PKG_HOSTBUILD_DIR \
-		install
-	make clean
+		cmake -G Ninja -DCMAKE_INSTALL_PREFIX=$TERMUX_PKG_HOSTBUILD_DIR
+	ninja -j $TERMUX_MAKE_PROCESSES install
+	ninja -t clean
+	rm -rf CMakeCache.txt CMakeFiles
 }
 
 termux_step_pre_configure() {

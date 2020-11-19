@@ -1,9 +1,10 @@
 TERMUX_PKG_HOMEPAGE=https://syncthing.net/
 TERMUX_PKG_DESCRIPTION="Decentralized file synchronization"
 TERMUX_PKG_LICENSE="MPL-2.0"
-TERMUX_PKG_VERSION=1.7.1
+TERMUX_PKG_VERSION=1.10.0
+TERMUX_PKG_REVISION=1
 TERMUX_PKG_SRCURL=https://github.com/syncthing/syncthing/releases/download/v${TERMUX_PKG_VERSION}/syncthing-source-v${TERMUX_PKG_VERSION}.tar.gz
-TERMUX_PKG_SHA256=edf0d9adcc57e61efc270205ad89e594ee79cadb39d568c4628de4d6f8e8f4c8
+TERMUX_PKG_SHA256=6598bc8daaae70e6e11c8df86f1e38a6a286401cfcbec44f25f5aee9f444eb4e
 
 termux_step_make(){
 	termux_setup_golang
@@ -20,7 +21,7 @@ termux_step_make(){
 
 	cd go/src/github.com/syncthing/syncthing
 
-	# Unset GOARCH so building build.go is works.
+	# Unset GOARCH so building build.go works.
 	export GO_ARCH=$GOARCH
 	export _CC=$CC
 	unset GOOS GOARCH CC

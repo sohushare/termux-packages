@@ -23,6 +23,13 @@ cd "$(realpath "$(dirname "$0")")"
 TERMUX_SCRIPTDIR=$(pwd)
 export TERMUX_SCRIPTDIR
 
+# Automatically enable offline set of sources and build tools.
+# Offline termux-packages bundle can be created by executing
+# script ./scripts/setup-offline-bundle.sh.
+if [ -f "${TERMUX_SCRIPTDIR}/build-tools/.installed" ]; then
+	export TERMUX_PACKAGES_OFFLINE=true
+fi
+
 # Lock file to prevent parallel running in the same environment.
 TERMUX_BUILD_LOCK_FILE="${TMPDIR}/.termux-build.lck"
 if [ ! -e "$TERMUX_BUILD_LOCK_FILE" ]; then
@@ -245,7 +252,7 @@ _show_usage() {
 	echo "  -D Build a disabled package in disabled-packages/."
 	echo "  -f Force build even if package has already been built."
 	[ "$TERMUX_ON_DEVICE_BUILD" = "false" ] && echo "  -i Download and extract dependencies instead of building them."
-	echo "  -I Download and extract dependencies instead of building them, keep existing /data/data/com.termux files."
+	echo "  -I Download and extract dependencies instead of building them, keep existing $TERMUX_BASE_DIR files."
 	echo "  -q Quiet build."
 	echo "  -s Skip dependency check."
 	echo "  -o Specify deb directory. Default: debs/."

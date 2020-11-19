@@ -56,6 +56,7 @@ PACKAGES+=" xmlto"
 # Needed by python modules (e.g. asciinema) and some build systems.
 PACKAGES+=" python3.7"
 PACKAGES+=" python3.8"
+PACKAGES+=" python3.9"
 PACKAGES+=" python3-pip"
 PACKAGES+=" python3-setuptools"
 
@@ -123,6 +124,9 @@ PACKAGES+=" python-yaml"
 # Java.
 PACKAGES+=" openjdk-8-jdk"
 
+# needed by ovmf
+PACKAGES+=" libarchive-tools"
+
 # Needed by packages in unstable repository.
 PACKAGES+=" docbook-to-man"
 PACKAGES+=" docbook-utils"
@@ -135,6 +139,10 @@ PACKAGES+=" heimdal-multidev"
 PACKAGES+=" comerr-dev"
 PACKAGES+=" llvm-10-tools"
 PACKAGES+=" llvm-10-dev"
+PACKAGES+=" libevent-dev"
+PACKAGES+=" libreadline-dev"
+PACKAGES+=" libconfig-dev"
+PACKAGES+=" libjansson-dev"
 
 # Needed by packages in X11 repository.
 PACKAGES+=" alex"
@@ -160,6 +168,9 @@ PACKAGES+=" protobuf-c-compiler"
 PACKAGES+=" python3-yaml"
 PACKAGES+=" cvs"
 
+# Needed by apt.
+PACKAGES+=" triehash"
+
 # Do not require sudo if already running as root.
 if [ "$(id -u)" = "0" ]; then
 	SUDO=""
@@ -177,5 +188,6 @@ $SUDO DEBIAN_FRONTEND=noninteractive \
 $SUDO locale-gen --purge en_US.UTF-8
 echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' | $SUDO tee -a /etc/default/locale
 
-$SUDO mkdir -p /data/data/com.termux/files/usr
+. $(dirname "$(realpath "$0")")/properties.sh
+$SUDO mkdir -p $TERMUX_PREFIX
 $SUDO chown -R $(whoami) /data
